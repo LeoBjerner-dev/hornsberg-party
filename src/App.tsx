@@ -222,7 +222,7 @@ function Countdown({ targetDate }: { targetDate: Date }) {
       viewport={{ once: true, amount: 0.45 }}
       whileInView={{ opacity: 1, y: 0 }}
     >
-      <p className="eyebrow">Affärskritiskt badfönster</p>
+      <p className="eyebrow">Tacka ja fönster</p>
       <h2>
         ⏳ {countdown.days} dagar, {countdown.hours} timmar,{' '}
         {countdown.minutes} minuter och {countdown.seconds} sekunder kvar
@@ -275,7 +275,6 @@ function SignupSection({
   onNo: () => void
   onSubmit: () => void
   participants: Participant[]
-  userName: string
 }) {
   const yesScale = 1 + noCount * 0.15
   const noScale = Math.max(0.32, 1 - noCount * 0.15)
@@ -288,13 +287,14 @@ function SignupSection({
   return (
     <section className="signup-grid">
       <motion.div
-        className="signup-card glass-panel"
-        initial={{ opacity: 0, x: -24 }}
-        transition={{ duration: 0.55 }}
+        className="decision-card glass-panel"
+        initial={{ opacity: 0, y: 24 }}
+        transition={{ duration: 0.55, delay: 0.1 }}
         viewport={{ once: true, amount: 0.4 }}
-        whileInView={{ opacity: 1, x: 0 }}
+        whileInView={{ opacity: 1, y: 0 }}
       >
-        <h2>✅ Anmälda legender</h2>
+        <p className="eyebrow">Tacka Ja här</p>
+        <h2>Det finns egentligen bara ett rimligt val.</h2>
         <form className="signup-form" onSubmit={handleSubmit}>
           <label htmlFor="name">Namn</label>
           <div className="input-row">
@@ -325,37 +325,6 @@ function SignupSection({
             ✅ Du är redan anmäld, legend.
           </motion.p>
         )}
-        <motion.div className="participant-list" layout>
-          <AnimatePresence>
-            {participants.map((participant) => (
-              <motion.article
-                className={participant.isUser ? 'participant-card you' : 'participant-card'}
-                initial={{ opacity: 0, scale: 0.9, y: 16 }}
-                key={participant.id}
-                layout
-                transition={{ type: 'spring', stiffness: 420, damping: 28 }}
-                whileHover={{ y: -4 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-              >
-                <span>
-                  {participant.name}
-                  {participant.isUser ? ' (Du)' : ''}
-                </span>
-              </motion.article>
-            ))}
-          </AnimatePresence>
-        </motion.div>
-      </motion.div>
-
-      <motion.div
-        className="decision-card glass-panel"
-        initial={{ opacity: 0, x: 24 }}
-        transition={{ duration: 0.55, delay: 0.1 }}
-        viewport={{ once: true, amount: 0.4 }}
-        whileInView={{ opacity: 1, x: 0 }}
-      >
-        <p className="eyebrow">Executive decision center</p>
-        <h2>Det finns egentligen bara ett rimligt val.</h2>
         <div className="choice-buttons">
           <motion.button
             animate={{ scale: yesScale }}
@@ -395,6 +364,36 @@ function SignupSection({
         <p className="fine-print">
           Nej knappen är juridiskt bindande.
         </p>
+      </motion.div>
+
+      <motion.div
+        className="signup-card glass-panel"
+        initial={{ opacity: 0, y: 24 }}
+        transition={{ duration: 0.55 }}
+        viewport={{ once: true, amount: 0.4 }}
+        whileInView={{ opacity: 1, y: 0 }}
+      >
+        <h2>✅ Anmälda legender</h2>
+        <motion.div className="participant-list" layout>
+          <AnimatePresence>
+            {participants.map((participant) => (
+              <motion.article
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                className={participant.isUser ? 'participant-card you' : 'participant-card'}
+                initial={{ opacity: 0, scale: 0.9, y: 16 }}
+                key={participant.id}
+                layout
+                transition={{ type: 'spring', stiffness: 420, damping: 28 }}
+                whileHover={{ y: -4 }}
+              >
+                <span>
+                  {participant.name}
+                  {participant.isUser ? ' (Du)' : ''}
+                </span>
+              </motion.article>
+            ))}
+          </AnimatePresence>
+        </motion.div>
       </motion.div>
     </section>
   )
@@ -481,7 +480,6 @@ function App() {
   const eventDate = useMemo(() => getEventDate(), [])
   const [participants, setParticipants] = useState<Participant[]>(seedParticipants)
   const [name, setName] = useState('')
-  const [userName, setUserName] = useState('')
   const [hasSaidYes, setHasSaidYes] = useState(false)
   const [latest, setLatest] = useState('Leo')
   const [noCount, setNoCount] = useState(0)
@@ -518,7 +516,6 @@ function App() {
 
     if (savedUserName) {
       setName(savedUserName)
-      setUserName(savedUserName)
     }
 
     if (savedHasSaidYes) {
@@ -550,7 +547,6 @@ function App() {
     })
 
     setName(cleanName)
-    setUserName(cleanName)
     setHasSaidYes(true)
     setLatest(displayName)
     setConfettiNonce((current) => current + 1)
@@ -608,7 +604,6 @@ function App() {
           onNo={handleNo}
           onSubmit={() => sayYes()}
           participants={participants}
-          userName={userName}
         />
       </div>
       <Waves />
