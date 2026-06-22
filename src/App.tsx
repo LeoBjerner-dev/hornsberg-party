@@ -196,7 +196,7 @@ function Hero({ participantCount }: { participantCount: number }) {
         <div className="hero-facts" aria-label="Eventinformation">
           <span>📍 Hornsbergs Strand</span>
           <span>🕒 Lördag kl. 14:00</span>
-          <span>☀️ Ta med badkläder och bra humör</span>
+          <span>☀️ Ta med badkläder</span>
         </div>
       </motion.div>
     </section>
