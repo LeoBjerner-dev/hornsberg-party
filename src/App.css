@@ -218,8 +218,7 @@ main {
 
 .input-row {
   display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 10px;
+  grid-template-columns: 1fr;
 }
 
 input {

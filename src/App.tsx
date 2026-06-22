@@ -306,14 +306,6 @@ function SignupSection({
               type="text"
               value={name}
             />
-            <motion.button
-              className="primary-button compact"
-              type="submit"
-              whileHover={{ y: -2 }}
-              whileTap={{ scale: 0.96 }}
-            >
-              Ja, jag kommer!
-            </motion.button>
           </div>
         </form>
         {hasSaidYes && (
