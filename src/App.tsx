@@ -601,6 +601,7 @@ function App() {
       <Waves />
       <GrumpModal onClose={acceptFromModal} show={showModal} />
     </main>
+    
   )
 }
 
