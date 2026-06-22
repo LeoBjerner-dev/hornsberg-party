@@ -187,7 +187,7 @@ function Hero({ participantCount }: { participantCount: number }) {
           className="legend-count"
           transition={{ duration: 2.6, repeat: Infinity }}
         >
-          🔥 {participantCount} antal legender har redan tackat ja
+          🔥 {participantCount} antal har redan tackat ja
         </motion.p>
         <h1>🍻 Bad &amp; Bärs på Hornsbergs Strand 🍻</h1>
         <p className="hero-subtitle">
@@ -314,7 +314,7 @@ function SignupSection({
             className="already-in"
             initial={{ opacity: 0, y: 8 }}
           >
-            ✅ Du är redan anmäld, legend.
+            ✅ Du är redan anmäld.
           </motion.p>
         )}
         <div className="choice-buttons">
@@ -365,7 +365,7 @@ function SignupSection({
         viewport={{ once: true, amount: 0.4 }}
         whileInView={{ opacity: 1, y: 0 }}
       >
-        <h2>✅ Anmälda legender</h2>
+        <h2>✅ Anmälda</h2>
         <motion.div className="participant-list" layout>
           <AnimatePresence>
             {participants.map((participant) => (
@@ -521,7 +521,7 @@ function App() {
   /* eslint-enable react-hooks/set-state-in-effect */
 
   function sayYes(sourceName = name) {
-    const cleanName = sanitizeName(sourceName) || 'Namnlös legend'
+    const cleanName = sanitizeName(sourceName) || 'Namnlös'
     const displayName = withBeer(cleanName)
     const participantId = `you-${cleanName.toLowerCase()}`
 
