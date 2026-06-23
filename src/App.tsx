@@ -26,9 +26,10 @@ const STORAGE_KEYS = {
 
 const seedParticipants: Participant[] = [
   { id: 'leo', name: 'Leo' },
+  { id: 'martin', name: 'Martin🥸' },
 ]
 
-const storageVersion = 'leo-only-start-v1'
+const storageVersion = 'leo-martin-start-v1'
 
 const noComments = [
   'Är du säker? 🤨',
@@ -473,7 +474,7 @@ function App() {
   const [participants, setParticipants] = useState<Participant[]>(seedParticipants)
   const [name, setName] = useState('')
   const [hasSaidYes, setHasSaidYes] = useState(false)
-  const [latest, setLatest] = useState('Leo')
+  const [latest, setLatest] = useState('Martin')
   const [noCount, setNoCount] = useState(0)
   const [noMessage, setNoMessage] = useState('')
   const [showModal, setShowModal] = useState(false)
